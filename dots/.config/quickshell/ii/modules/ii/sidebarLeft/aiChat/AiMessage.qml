@@ -91,6 +91,7 @@ Rectangle {
                     margins: 4
                 }
                 spacing: 18
+                layoutDirection: root.messageData?.role === "user" ? Qt.RightToLeft : Qt.LeftToRight
 
                 Item { // Name
                     id: nameWrapper
@@ -101,11 +102,13 @@ Rectangle {
                     RowLayout {
                         id: nameRowLayout
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
+                        anchors.left: root.messageData?.role === "user" ? undefined : parent.left
                         anchors.right: parent.right
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
-                        spacing: 12
+                        width: root.messageData?.role === "user" ? implicitWidth : parent.width - anchors.leftMargin - anchors.rightMargin
+                        spacing: root.messageData?.role === "user" ? 6 : 12
+                        layoutDirection: root.messageData?.role === "user" ? Qt.RightToLeft : Qt.LeftToRight
 
                         Item {
                             Layout.alignment: Qt.AlignVCenter
@@ -142,8 +145,9 @@ Rectangle {
                         StyledText {
                             id: providerName
                             Layout.alignment: Qt.AlignVCenter
-                            Layout.fillWidth: true
+                            Layout.fillWidth: root.messageData?.role !== "user"
                             elide: Text.ElideRight
+                            horizontalAlignment: root.messageData?.role === "user" ? Text.AlignRight : Text.AlignLeft
                             font.pixelSize: Appearance.font.pixelSize.normal
                             color: Appearance.m3colors.m3onSecondaryContainer
                             text: messageData?.role == 'assistant' ? Ai.models[messageData?.model].name :
@@ -360,4 +364,3 @@ Rectangle {
 
     }
 }
-
