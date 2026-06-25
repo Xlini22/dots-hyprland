@@ -241,6 +241,7 @@ Singleton {
                 property bool borderless: false // true for no grouping of items
                 property string topLeftIcon: "spark" // Options: "distro" or any icon name in ~/.config/quickshell/ii/assets/icons
                 property bool showBackground: true
+                property int backgroundOpacity: 45
                 property bool verbose: true
                 property bool vertical: false
                 property JsonObject resources: JsonObject {

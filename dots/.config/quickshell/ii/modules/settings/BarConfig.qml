@@ -148,6 +148,19 @@ ContentPage {
                 Config.options.bar.showBackground = !checked;  
             }  
         }  
+
+        ConfigSpinBox {
+            icon: "opacity"
+            text: Translation.tr("Transparency level")
+            value: Config.options.bar.backgroundOpacity
+            from: 0
+            to: 100
+            stepSize: 5
+            enabled: !Config.options.bar.showBackground
+            onValueChanged: {
+                Config.options.bar.backgroundOpacity = value;
+            }
+        }
     }  
   
     ContentSection {  
