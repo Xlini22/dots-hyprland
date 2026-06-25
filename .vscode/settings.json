@@ -1,0 +1,18 @@
+{
+  "qt-core.additionalQtPaths": [
+    {
+      "name": "Qt 6 system",
+      "path": "/usr/lib/qt6/bin/qtpaths6"
+    }
+  ],
+  "qt-qml.qmlls.customExePath": "/usr/lib/qt6/bin/qmlls",
+  "qt-qml.qmlls.additionalImportPaths": [
+    "/usr/lib/qt6/qml",
+    "${workspaceFolder}/dots/.config/quickshell/ii",
+    "${workspaceFolder}/dots/.config/quickshell/ii/modules",
+    "${workspaceFolder}/dots/.config/quickshell/ii/services",
+    "${workspaceFolder}/dots/.config/quickshell/ii/panelFamilies"
+  ],
+  "qt-qml.qmlls.useQmlImportPathEnvVar": true,
+  "qt-qml.qmlls.useNoCMakeCalls": true
+}
