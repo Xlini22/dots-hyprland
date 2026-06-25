@@ -212,8 +212,8 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
             Ai.sendUserMessage(inputText);
         }
 
-        // Always scroll to bottom when user sends a message
-        messageListView.positionViewAtEnd();
+        // Show the newly sent message, then leave the view still while the AI streams.
+        messageListView.scrollToBottomSoon();
     }
 
     Process {
@@ -364,15 +364,14 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                 mouseScrollFactor: Config.options.interactions.scrolling.mouseScrollFactor * 1.4
 
                 property int lastResponseLength: 0
-                // onContentHeightChanged: {
-                //     if (atYEnd)
-                //         Qt.callLater(positionViewAtEnd);
-                // }
-                // onCountChanged: {
-                //     // Auto-scroll when new messages are added
-                //     if (atYEnd)
-                //         Qt.callLater(positionViewAtEnd);
-                // }
+
+                function scrollToBottomSoon() {
+                    Qt.callLater(() => messageListView.positionViewAtEnd());
+                }
+
+                onCountChanged: {
+                    scrollToBottomSoon();
+                }
 
                 add: null // Prevent function calls from being janky
 
@@ -405,6 +404,14 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
             ScrollToBottomButton {
                 z: 3
                 target: messageListView
+            }
+
+            Connections {
+                target: Ai
+
+                function onResponseFinished() {
+                    messageListView.scrollToBottomSoon();
+                }
             }
         }
 

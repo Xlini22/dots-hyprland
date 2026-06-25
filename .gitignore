@@ -16,5 +16,5 @@ __pycache__/
 # Emacs auto backup file
 *~
 
-#test
+# test script
 /test

@@ -159,7 +159,10 @@ ColumnLayout {
             selectedTextColor: Appearance.m3colors.m3onSecondaryContainer
             selectionColor: Appearance.colors.colSecondaryContainer
             wrapMode: TextEdit.Wrap
-            color: root.messageData?.thinking ? Appearance.colors.colSubtext : Appearance.colors.colOnLayer1
+            horizontalAlignment: root.messageData?.role === "user" ? TextEdit.AlignRight : TextEdit.AlignLeft
+            color: root.messageData?.thinking ? Appearance.colors.colSubtext :
+                root.messageData?.role === "user" ? Appearance.m3colors.m3onSecondaryContainer :
+                Appearance.colors.colOnLayer1
             textFormat: renderMarkdown ? TextEdit.MarkdownText : TextEdit.PlainText
             text: modelData
 
